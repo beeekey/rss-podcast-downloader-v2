@@ -11,7 +11,7 @@ except ImportError:
     sys.exit(1)
 
 THIS_DIR = os.path.abspath(os.path.dirname(__file__))
-VERSION_FILE = os.path.join(THIS_DIR, 'rss-podcast-downloader', '__init__.py')
+VERSION_FILE = os.path.join(THIS_DIR, 'rss_podcast_downloader', '__init__.py')
 
 
 # Read the version from our project.  There are various ways of doing this, but
@@ -33,9 +33,9 @@ if __name__ == '__main__':
         name="rss-podcast-downloader",
         version=scrape_version(),
         description="Data rss-podcast-downloader package",
-        author="<full name>",
-        url="https://github.com/<username>/rss-podcast-downloader",
-        install_requires=[],
+        author="Timothy McFadden",
+        url="https://github.com/mtik00/rss-podcast-downloader",
+        install_requires=['persistent_pineapple'],
         packages=find_packages(),
         package_data={"rss-podcast-downloader": ['.*']},
         zip_safe=True,

@@ -14,7 +14,7 @@ from __future__ import print_function
 
 # Metadata #####################################################################
 __author__ = "Timothy McFadden"
-__date__ = "99/99/9999"
+__date__ = "11/16/2014"
 __copyright__ = "Timothy McFadden, 2014"
 __license__ = "MIT"
 __version__ = "1.0.0dev"

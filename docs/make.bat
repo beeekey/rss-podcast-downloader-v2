@@ -1,6 +1,7 @@
 @ECHO OFF
 
 REM Command file for Sphinx documentation
+set PROJECTNAME="rss-podcast-downloader"
 
 if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
@@ -99,9 +100,9 @@ if "%1" == "qthelp" (
 	echo.
 	echo.Build finished; now you can run "qcollectiongenerator" with the ^
 .qhcp project file in %BUILDDIR%/qthelp, like this:
-	echo.^> qcollectiongenerator %BUILDDIR%\qthelp\rss-podcast-downloader.qhcp
+	echo.^> qcollectiongenerator %BUILDDIR%\qthelp\%PROJECTNAME%.qhcp
 	echo.To view the help file:
-	echo.^> assistant -collectionFile %BUILDDIR%\qthelp\rss-podcast-downloader.ghc
+	echo.^> assistant -collectionFile %BUILDDIR%\qthelp\%PROJECTNAME%.ghc
 	goto end
 )
 

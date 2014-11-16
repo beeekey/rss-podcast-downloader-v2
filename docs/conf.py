@@ -8,6 +8,7 @@ import sys
 
 # Options ######################################################################
 PROJECT = u"rss-podcast-downloader"
+PROJECT_LIB = u"rss_podcast_downloader"
 USERNAME = u"Timothy McFadden"
 COPYRIGHT = u"2014, %s" % USERNAME
 DOCTEST = True
@@ -58,7 +59,7 @@ copyright = COPYRIGHT
 THIS_DIR = os.path.realpath(os.path.dirname(__file__))
 LIB_DIR = os.path.realpath(os.path.join(THIS_DIR, '..', 'src'))
 sys.path.insert(0, os.path.abspath(LIB_DIR))
-version_file = os.path.join(LIB_DIR, PROJECT, '__init__.py')
+version_file = os.path.join(LIB_DIR, PROJECT_LIB, '__init__.py')
 __version__ = None
 with open(version_file, 'rb') as f:
     exec(f.read())
