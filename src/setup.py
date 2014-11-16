@@ -35,7 +35,7 @@ if __name__ == '__main__':
         description="Data rss-podcast-downloader package",
         author="Timothy McFadden",
         url="https://github.com/mtik00/rss-podcast-downloader",
-        install_requires=['persistent_pineapple'],
+        install_requires=['Persistent_Pineapple'],
         packages=find_packages(),
         package_data={"rss-podcast-downloader": ['.*']},
         zip_safe=True,
