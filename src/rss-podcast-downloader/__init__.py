@@ -5,7 +5,7 @@ This module does awesome stuff!
 Example::
 
     >>> from __future__ import print_function
-    >>> from SAMPLEPROJ import f1
+    >>> from rss-podcast-downloader import f1
     >>> f1(1)
     >>>
 """

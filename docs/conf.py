@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 #
-# SAMPLEPROJ documentation build configuration file, created by
+# rss-podcast-downloader documentation build configuration file, created by
 # sphinx-quickstart on Fri Sep 05 08:27:42 2014.
 
 import os
 import sys
 
 # Options ######################################################################
-PROJECT = u"SAMPLEPROJ"
+PROJECT = u"rss-podcast-downloader"
 USERNAME = u"Timothy McFadden"
 COPYRIGHT = u"2014, %s" % USERNAME
 DOCTEST = True

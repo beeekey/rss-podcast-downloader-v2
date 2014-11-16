@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-'''SAMPLEPROJ package setup script.'''
+'''rss-podcast-downloader package setup script.'''
 from __future__ import print_function
 import os
 import re
@@ -11,7 +11,7 @@ except ImportError:
     sys.exit(1)
 
 THIS_DIR = os.path.abspath(os.path.dirname(__file__))
-VERSION_FILE = os.path.join(THIS_DIR, 'SAMPLEPROJ', '__init__.py')
+VERSION_FILE = os.path.join(THIS_DIR, 'rss-podcast-downloader', '__init__.py')
 
 
 # Read the version from our project.  There are various ways of doing this, but
@@ -30,14 +30,14 @@ def scrape_version(path=VERSION_FILE):
 
 if __name__ == '__main__':
     setup(
-        name="SAMPLEPROJ",
+        name="rss-podcast-downloader",
         version=scrape_version(),
-        description="Data SAMPLEPROJ package",
+        description="Data rss-podcast-downloader package",
         author="<full name>",
-        url="https://github.com/<username>/SAMPLEPROJ",
+        url="https://github.com/<username>/rss-podcast-downloader",
         install_requires=[],
         packages=find_packages(),
-        package_data={"SAMPLEPROJ": ['.*']},
+        package_data={"rss-podcast-downloader": ['.*']},
         zip_safe=True,
         include_package_data=True,
         test_suite="tests",

@@ -12,13 +12,13 @@ import sys
 import unittest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-import SAMPLEPROJ
+import rss_podcast_downloader
 
 
 class Test(unittest.TestCase):
 
     def test_f1(self):
-        SAMPLEPROJ.f1("testing")
+        rss_podcast_downloader.f1("testing")
 
 
 if __name__ == '__main__':

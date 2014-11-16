@@ -1,8 +1,8 @@
-.. SAMPLEPROJ documentation master file, created by
+.. rss-podcast-downloader documentation master file, created by
    sphinx-quickstart on Fri Sep 05 08:27:42 2014.
 
-Documentation for SAMPLEPROJ
-============================
+Documentation for rss-podcast-downloader
+========================================
 
 Contents:
 

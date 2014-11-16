@@ -77,17 +77,17 @@ qthelp:
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
-	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/SAMPLEPROJ.qhcp"
+	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/rss-podcast-downloader.qhcp"
 	@echo "To view the help file:"
-	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/SAMPLEPROJ.qhc"
+	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/rss-podcast-downloader.qhc"
 
 devhelp:
 	$(SPHINXBUILD) -b devhelp $(ALLSPHINXOPTS) $(BUILDDIR)/devhelp
 	@echo
 	@echo "Build finished."
 	@echo "To view the help file:"
-	@echo "# mkdir -p $$HOME/.local/share/devhelp/SAMPLEPROJ"
-	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/SAMPLEPROJ"
+	@echo "# mkdir -p $$HOME/.local/share/devhelp/rss-podcast-downloader"
+	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/rss-podcast-downloader"
 	@echo "# devhelp"
 
 epub:

@@ -114,7 +114,7 @@ if __name__ == '__main__':
 
     # Read the version from our project
     __version__ = None
-    with open(os.path.join(LIB_DIR, 'SAMPLEPROJ', '__init__.py'), 'rb') as f:
+    with open(os.path.join(LIB_DIR, 'rss-podcast-downloader', '__init__.py'), 'rb') as f:
         exec(f.read())
 
     remove_directory(release_dir, remove_top=False, filter=lambda x: "keep" not in x)
@@ -140,7 +140,7 @@ if __name__ == '__main__':
     shutil.move(source, dest)
 
     # remove left over dirs
-    for directory in ['SAMPLEPROJ.egg-info', 'dist', 'build', 'SAMPLEPROJ-%s' % __version__]:
+    for directory in ['rss-podcast-downloader.egg-info', 'dist', 'build', 'rss-podcast-downloader-%s' % __version__]:
         path = os.path.join(LIB_DIR, directory)
         if os.path.exists(path):
             remove_directory(path)

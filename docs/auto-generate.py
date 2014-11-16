@@ -18,7 +18,7 @@ __version__ = "0.03"
 # Globals ######################################################################
 
 # Base directory to search for modules
-LIBDIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', 'src', 'SAMPLEPROJ'))
+LIBDIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', 'src', 'rss-podcast-downloader'))
 
 # Base directory to put auto-generated doc files.
 DOCDIR = os.path.realpath(os.path.join(os.path.dirname(__file__), 'rst', 'src'))
