@@ -4,8 +4,7 @@ This module does awesome stuff!
 
 Example::
 
-    >>> from __future__ import print_function
-    >>> from rss-podcast-downloader import f1
+    >>> from rss_podcast_downloader import f1
     >>> f1(1)
     >>>
 """
