@@ -2,7 +2,7 @@
 '''rss-podcast-downloader package setup script.'''
 from __future__ import print_function
 import os
-import re
+# import re
 import sys
 try:
     from setuptools import setup, find_packages
@@ -10,28 +10,18 @@ except ImportError:
     print("ERROR: This package requires setuptools in order to install.", file=sys.stderr)
     sys.exit(1)
 
+
+# Read the version from our project
 THIS_DIR = os.path.abspath(os.path.dirname(__file__))
-VERSION_FILE = os.path.join(THIS_DIR, 'rss_podcast_downloader', '__init__.py')
-
-
-# Read the version from our project.  There are various ways of doing this, but
-# scraping the file has the least problems across Python versions 2.6 through
-# 3.4.
-def scrape_version(path=VERSION_FILE):
-    re_version = re.compile("^(VERSION|__version__)\s*=\s*['\"](.*?)['\"]")
-
-    with open(path, 'rb') as fh:
-        for line in fh:
-            if re_version.match(line):
-                return re_version.match(line).group(2)
-
-    raise Exception("Can't find version in [{}]".format(path))
+PKG_DIR = os.path.join(THIS_DIR, 'src')
+sys.path.insert(0, PKG_DIR)
+from rss_podcast_downloader import __version__
 
 
 if __name__ == '__main__':
     setup(
         name="rss-podcast-downloader",
-        version=scrape_version(),
+        version=__version__,  # scrape_version(),
         description="Data rss-podcast-downloader package",
         author="Timothy McFadden",
         url="https://github.com/mtik00/rss-podcast-downloader",
