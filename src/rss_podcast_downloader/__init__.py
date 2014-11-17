@@ -32,6 +32,7 @@ __version__ = "1.0.0dev"
 
 
 # Globals ######################################################################
+VERSION = __version__
 __PRINT_DOTS = False
 __INITIALIZED = False
 
