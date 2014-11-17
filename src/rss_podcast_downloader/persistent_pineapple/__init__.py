@@ -32,7 +32,7 @@ __status__ = "Development"
 # Imports #####################################################################
 import os.path
 from copy import copy
-from persistent_pineapple._json import JSON
+from ._json import JSON
 
 # Globals #####################################################################
 VERSION = "0.0.0.2"  # Library version

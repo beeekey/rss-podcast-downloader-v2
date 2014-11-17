@@ -2,7 +2,6 @@
 '''rss-podcast-downloader package setup script.'''
 from __future__ import print_function
 import os
-# import re
 import sys
 try:
     from setuptools import setup, find_packages
@@ -21,7 +20,7 @@ from rss_podcast_downloader import __version__
 if __name__ == '__main__':
     setup(
         name="rss-podcast-downloader",
-        version=__version__,  # scrape_version(),
+        version=__version__,
         description="Data rss-podcast-downloader package",
         author="Timothy McFadden",
         url="https://github.com/mtik00/rss-podcast-downloader",

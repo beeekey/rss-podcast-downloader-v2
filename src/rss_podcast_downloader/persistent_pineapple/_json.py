@@ -17,6 +17,7 @@ import json
 import re
 import sys
 
+
 ###############################################################################
 def container_to_ascii(item):
     '''Converts all items from unicode to ascii, where needed.  This is a
@@ -35,7 +36,7 @@ def container_to_ascii(item):
         >>>
     '''
     result = None
-    
+
     if sys.version_info[0] == 2 and type(item) is unicode:
         result = item.encode('ascii')
     elif type(item) is list:
@@ -65,7 +66,7 @@ class JSON(object):
 
     JSON reads much like Python; [] is for a list of items, {} is for a
     dictionary.
-    
+
     Some important notes:
 
     * single-quotes (B{'}) are invalid; always use double-quotes (B{"})
@@ -77,17 +78,17 @@ class JSON(object):
     * JSON does not supports comments.  This functionality was added to this object to make life easier.
 
     We support the following types of comments
-    
+
     * A line consisting of 0 or more whitespace characters followed by ``//``
     * Text ending a line with 1 or more whitespace characters followed
       by ``//``
     * All text in between ``/*`` and ``*/``
 
     Examples
-    
+
         .. code-block:: python
             :linenos:
-            
+
             // this line is ignored
             {"key": 5} // the rest of the line is ignored
             {"key": 5 /*,"key2": 6*/}  // key2 and the remainder is ignored
@@ -163,7 +164,7 @@ class JSON(object):
                 if ("Expecting property name" in err.message) and \
                    ("'" in context):
                     print("Possible invalid single-quote around here (JSON "
-                        "only supports double-quotes):")
+                          "only supports double-quotes):")
                     print(context)
                 elif "Expecting property name" in err.message:
                     print("Possible trailing comma somewhere around here:")

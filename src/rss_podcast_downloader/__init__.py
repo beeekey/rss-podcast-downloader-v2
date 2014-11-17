@@ -10,6 +10,8 @@ Example::
 """
 # Imports ######################################################################
 from __future__ import print_function
+from .persistent_pineapple import PersistentPineapple
+from .cache import Cache
 
 
 # Metadata #####################################################################
@@ -23,3 +25,14 @@ __version__ = "1.0.0dev"
 # Globals ######################################################################
 def f1(something):
     print("Hello World!", something)
+
+
+def process(config_file, cache_file, logfile=None):
+    """Process the config file, download the podcasts, and store the results
+    in the cache_file.
+    """
+    settings = PersistentPineapple(config_file, woc=False, lofc=False)
+    cache = Cache(settings["cache-file"])
+
+    print(settings["podcasts"])
+    print(cache)
