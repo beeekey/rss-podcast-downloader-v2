@@ -10,8 +10,8 @@ Example::
 """
 # Imports ######################################################################
 from __future__ import print_function
-import os
 import logging
+from .settings import get_settings
 
 
 # Metadata #####################################################################
@@ -24,13 +24,6 @@ __version__ = "1.0.0dev"
 
 # Globals ######################################################################
 LOGGER = None
-
-LOGFILE_DIR = "."
-LOGFILE_NAME = None  # "rss-podcast-downloader-log.txt"
-LOGFILE_FORMATTER = logging.Formatter('%(asctime)s - %(filename)s:%(lineno)d - %(levelname)s - %(message)s')
-LOGFILE_LEVEL = logging.DEBUG
-
-SCREEN_FORMATTER = logging.Formatter('%(asctime)s - %(filename)s:%(lineno)d - %(levelname)s - %(message)s')
 SCREEN_LEVEL = logging.INFO
 
 
@@ -42,15 +35,17 @@ def _init():
         LOGGER.setLevel(logging.DEBUG)
 
         ch = logging.StreamHandler()
-        ch.setFormatter(SCREEN_FORMATTER)
+        screen_formatter = logging.Formatter(get_settings()["screen-formatter"])
+        ch.setFormatter(screen_formatter)
         ch.setLevel(SCREEN_LEVEL)
         LOGGER.addHandler(ch)
 
-        if LOGFILE_NAME:
-            path = os.path.join(LOGFILE_DIR, LOGFILE_NAME)
-            fh = logging.FileHandler(path)
-            fh.setLevel(LOGFILE_LEVEL)
-            fh.setFormatter(SCREEN_FORMATTER)
+        logfile_path = get_settings()["log-file"]
+        if logfile_path:
+            logfile_formatter = logging.Formatter(get_settings()["log-file-formatter"])
+            fh = logging.FileHandler(logfile_path, get_settings()["log-file-mode"])
+            fh.setLevel(get_settings()["log-file-level"])
+            fh.setFormatter(logfile_formatter)
             LOGGER.addHandler(fh)
 
 

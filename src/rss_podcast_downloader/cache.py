@@ -6,7 +6,7 @@ This module implements the caching interface.
 from __future__ import print_function
 import sqlite3
 from rss_podcast_downloader.logger import get_logger
-from rss_podcast_downloader.episode import Episode
+
 
 # Metadata #####################################################################
 __author__ = "Timothy McFadden"
@@ -27,7 +27,7 @@ class Cache:
             self.cur.execute("SELECT * FROM podcasts")
         except:
             self.logger.warn("Creating the podcasts table")
-            self.cur.execute("CREATE TABLE podcasts(id INTEGER PRIMARY KEY, date REAL, title TEXT, url TEXT, prefix TEXT);")
+            self.cur.execute("CREATE TABLE podcasts(id INTEGER PRIMARY KEY, date REAL, title TEXT, url TEXT, prefix TEXT, filename TEXT);")
 
         try:
             self.cur.execute("SELECT * FROM sync_date")
@@ -42,21 +42,44 @@ class Cache:
         self.conn.commit()
         self.conn.close()
 
-    def has(self, object):
+    def has(self, object, log=True):
         cmd = "SELECT * FROM podcasts WHERE title='%s' AND prefix='%s'" % (object.title, object.prefix)
         self.cur.execute(cmd)
-        try:
-            (id, date, title, url, prefix) = self.cur.fetchone()
-            return Episode(date, title, url, prefix, '')
-        except Exception as e:
-            self.logger.debug("Couldn't find [%s] in podcasts table: [%s]" % (object.url, e))
-            return None
+        item = self.cur.fetchone()
+        if item:
+            return True
 
-    def add(self, object):
-        if (self.Has(object)):
+        cmd = "SELECT * FROM podcasts WHERE filename='%s'" % object.filename
+        self.cur.execute(cmd)
+        item = self.cur.fetchone()
+        if item:
+            return True
+
+        if log:
+            self.logger.debug("Couldn't find [%s] in podcasts table" % object.url)
+
+        return False
+
+    def has_filename(self, filename):
+        cmd = "SELECT * FROM podcasts WHERE filename='%s'" % filename
+        self.cur.execute(cmd)
+        item = self.cur.fetchone()
+        if item:
+            return True
+        else:
+            self.logger.debug("Couldn't find [%s] in podcasts table" % object.url)
             return False
 
-        cmd = "INSERT INTO podcasts(date,title,url,prefix) VALUES('%s', '%s', '%s', '%s')" % (object.date, object.title, object.url, object.prefix)
+    def remove_by_filename(self, filename):
+        """Removes the entry with the given filename from the cache."""
+        cmd = "DELETE FROM podcasts WHERE filename='%s' " % filename
+        self.cur.execute(cmd)
+
+    def add(self, object):
+        if (self.has(object, log=False)):
+            return False
+
+        cmd = "INSERT INTO podcasts(date,title,url,prefix,filename) VALUES('%s', '%s', '%s', '%s', '%s')" % (object.date, object.title, object.url, object.prefix, object.filename)
         self.cur.execute(cmd)
         return True
 

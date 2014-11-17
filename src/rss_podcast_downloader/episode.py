@@ -7,6 +7,7 @@ This module holds the representation of a single podcast episode.
 from __future__ import print_function
 import re
 import urllib2
+from time import strftime, time, localtime
 from rss_podcast_downloader.logger import get_logger
 
 
@@ -22,17 +23,19 @@ DEBUG = False
 
 
 class Episode:
-    def __init__(self, date, title, url, prefix, feed_title):
+    def __init__(self, date, title, url, prefix, feed_title, use_date_prefix=False):
         self.url = url
         self.title = title
         self.prefix = prefix
-        self.date = date
+        self.date = date or time.time()
         self.feed_title = feed_title
+        self.use_date_prefix = use_date_prefix
         self.logger = get_logger()
 
     def __repr__(self):
-        return "<Episode url:[%s] title:[%s] filename:[%s] feed:[%s]>" % (self.url, self.title, self.Filename(), self.feed_title)
+        return "<Episode url:[%s] title:[%s] filename:[%s] feed:[%s]>" % (self.url, self.title, self.filename, self.feed_title)
 
+    @property
     def filename(self):
         ## The purpose of this function is to normalize the title into something that
         ## won't be an issue for the file-system, or using the file later on.
@@ -41,12 +44,16 @@ class Episode:
         temp_title = re.sub(r'[/\\]', '-', temp_title)          # Path characters mess up the filename
         temp_title = re.sub(' ', '-', temp_title)
         temp_title += '.mp3'
-        return self.prefix + '-' + temp_title.lower()
+
+        if self.use_date_prefix:
+            return self.prefix + '-' + strftime("%Y%m%d-", localtime(self.date)) + temp_title.lower()
+        else:
+            return self.prefix + '-' + temp_title.lower()
 
     def download(self, directory):
         try:
             mp3file = urllib2.urlopen(self.url)
-            output = open("%s/%s" % (directory, self.Filename()), 'wb')
+            output = open("%s/%s" % (directory, self.filename), 'wb')
             output.write(mp3file.read())
             output.close()
         except Exception as e:
