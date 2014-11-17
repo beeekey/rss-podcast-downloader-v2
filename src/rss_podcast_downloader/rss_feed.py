@@ -6,7 +6,10 @@ This module holds the representation of the RSS feed.
 from __future__ import print_function
 import re
 import time
-import urllib2
+try:
+    import urllib.request as urllib2
+except ImportError:
+    import urllib2
 from xml.dom.minidom import parseString
 from .episode import Episode
 from .logger import get_logger

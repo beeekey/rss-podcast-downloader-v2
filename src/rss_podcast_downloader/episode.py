@@ -6,7 +6,10 @@ This module holds the representation of a single podcast episode.
 # Imports ######################################################################
 from __future__ import print_function
 import re
-import urllib2
+try:
+    import urllib.request as urllib2
+except ImportError:
+    import urllib2
 from time import strftime, time, localtime
 from rss_podcast_downloader.logger import get_logger
 
