@@ -145,6 +145,7 @@ def cache_all(config_file, cache_file, logfile=None):
     if not __INITIALIZED:
         raise Exception("Must call initialize() first")
 
+    get_logger().debug("##### Start cache all " + "#" * 58)
     cache = Cache(get_settings()["cache-file"])
 
     for podcast in get_settings()["podcasts"]:
@@ -165,7 +166,7 @@ def process(cache_file):
     if not __INITIALIZED:
         raise Exception("Must call initialize() first")
 
-    # SETTINGS = PersistentPineapple(config_file, woc=False, lofc=False)
+    get_logger().debug("##### Start process " + "#" * 60)
 
     # Start up our status indicator
     print_dot_thread = threading.Thread(target=print_dots)
