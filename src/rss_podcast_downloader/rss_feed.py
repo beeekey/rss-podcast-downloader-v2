@@ -56,7 +56,12 @@ class RSSFeed:
 
             if (enclosure and title):
                 url = enclosure.getAttribute('url')
-                url = re.search('(.*\.mp3).*', url).group(1)
+
+                try:
+                    url = re.search('(.*\.mp3).*', url).group(1)
+                except AttributeError as e:
+                    get_logger().debug("Couldn't parse url [%s]: %s", url, e)
+                    continue
 
                 title = title.toxml().replace('<title>', '').replace('</title>', '')
                 title = re.sub("'", "", title)
