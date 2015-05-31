@@ -58,7 +58,7 @@ class RSSFeed:
                 url = enclosure.getAttribute('url')
 
                 try:
-                    url = re.search('(.*\.mp3).*', url).group(1)
+                    url = re.search('(.*\.(mp3|m4a)).*', url).group(1)
                 except AttributeError as e:
                     get_logger().debug("Couldn't parse url [%s]: %s", url, e)
                     continue
