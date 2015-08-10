@@ -32,14 +32,22 @@ class RSSFeed:
         self.prefix = prefix
         self.use_date_prefix = use_date_prefix
         self.download()
-        self.parse()
+
+        if self.dom:
+            self.parse()
 
     def __str__(self):
         return "RSSFeed '%s' (%i episodes)" % (self.title, len(self.episodes))
 
     def download(self):
         """Downloads the RSS feed."""
-        file = urllib2.urlopen(self.url)
+        try:
+            file = urllib2.urlopen(self.url)
+        except urllib2.HTTPError as e:
+            get_logger().error("Couldn't download [%s]: %s", self.url, e)
+            self.dom = None
+            return
+
         data = file.read()
         file.close()
         self.dom = parseString(data)
