@@ -30,7 +30,7 @@ DEBUG = False
 class Episode:
     def __init__(self, date, title, url, prefix, feed_title, use_date_prefix=False):
         self.url = url
-        self.title = title
+        self.title = HTMLParser().unescape(title)
         self.prefix = prefix
         self.date = date or time.time()
         self.feed_title = feed_title
@@ -44,8 +44,7 @@ class Episode:
     def filename(self):
         # The purpose of this function is to normalize the title into something that
         # won't be an issue for the file-system, or using the file later on.
-        temp_title = HTMLParser().unescape(self.title)
-        temp_title = slugify(temp_title)
+        temp_title = slugify(self.title)
         temp_title += '.mp3'
 
         if self.use_date_prefix:
