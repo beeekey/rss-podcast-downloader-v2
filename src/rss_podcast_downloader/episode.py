@@ -5,19 +5,21 @@ This module holds the representation of a single podcast episode.
 
 # Imports ######################################################################
 from __future__ import print_function
-import re
+
 try:
     import urllib.request as urllib2
 except ImportError:
     import urllib2
 from time import strftime, time, localtime
 from rss_podcast_downloader.logger import get_logger
+from HTMLParser import HTMLParser
+from slugify import slugify
 
 
 # Metadata #####################################################################
 __author__ = "Timothy McFadden"
 __date__ = "11/16/2014"
-__copyright__ = "Timothy McFadden, 2014"
+__copyright__ = "Timothy McFadden, 2014-2015"
 __license__ = "MIT"
 __version__ = "1.0.0dev"
 
@@ -40,12 +42,10 @@ class Episode:
 
     @property
     def filename(self):
-        ## The purpose of this function is to normalize the title into something that
-        ## won't be an issue for the file-system, or using the file later on.
-        temp_title = re.sub('[-\'#,:\.!\?"]', '', self.title)   # There's probably more needed here, but it's just convenience
-        temp_title = re.sub('&.*?;', '', temp_title)            # URL Escapes
-        temp_title = re.sub(r'[/\\]', '-', temp_title)          # Path characters mess up the filename
-        temp_title = re.sub(' ', '-', temp_title)
+        # The purpose of this function is to normalize the title into something that
+        # won't be an issue for the file-system, or using the file later on.
+        temp_title = HTMLParser().unescape(self.title)
+        temp_title = slugify(temp_title)
         temp_title += '.mp3'
 
         if self.use_date_prefix:
