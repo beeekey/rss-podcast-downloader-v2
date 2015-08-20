@@ -6,14 +6,19 @@ This module holds the representation of a single podcast episode.
 # Imports ######################################################################
 from __future__ import print_function
 
+from slugify import slugify
+from time import strftime, time, localtime
+from rss_podcast_downloader.logger import get_logger
+
 try:
     import urllib.request as urllib2
 except ImportError:
     import urllib2
-from time import strftime, time, localtime
-from rss_podcast_downloader.logger import get_logger
-from HTMLParser import HTMLParser
-from slugify import slugify
+
+try:
+    from HTMLParser import HTMLParser
+except ImportError:
+    from html.parser import HTMLParser
 
 
 # Metadata #####################################################################
