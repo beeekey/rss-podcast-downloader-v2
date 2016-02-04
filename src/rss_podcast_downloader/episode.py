@@ -35,7 +35,11 @@ DEBUG = False
 class Episode:
     def __init__(self, date, title, url, prefix, feed_title, use_date_prefix=False):
         self.url = url
-        self.title = HTMLParser().unescape(title)
+
+        # Remove all non-ascii characters from the title (cuz I'm lazy)
+        self.title = ''.join([x for x in title if ord(x) < 255])
+
+        self.title = HTMLParser().unescape(self.title)
         self.prefix = prefix
         self.date = date or time.time()
         self.feed_title = feed_title
