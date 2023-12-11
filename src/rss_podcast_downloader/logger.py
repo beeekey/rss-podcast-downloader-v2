@@ -9,7 +9,7 @@ Example::
     >>>
 """
 # Imports ######################################################################
-from __future__ import print_function
+
 import logging
 from .settings import get_settings
 

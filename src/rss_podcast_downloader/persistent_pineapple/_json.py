@@ -37,13 +37,13 @@ def container_to_ascii(item):
     '''
     result = None
 
-    if sys.version_info[0] == 2 and type(item) is unicode:
+    if sys.version_info[0] == 2 and type(item) is str:
         result = item.encode('ascii')
     elif type(item) is list:
-        result = map(lambda x: container_to_ascii(x), item[:])
+        result = [container_to_ascii(x) for x in item[:]]
     elif type(item) is dict:
         result = dict()
-        for key, value in item.items():
+        for key, value in list(item.items()):
             result[container_to_ascii(key)] = container_to_ascii(value)
     else:
         result = item

@@ -4,7 +4,7 @@ This module holds the representation of the project settings.
 """
 
 # Imports ######################################################################
-from __future__ import print_function
+
 from .persistent_pineapple import PersistentPineapple
 
 

@@ -3,13 +3,13 @@
 This module holds the representation of the RSS feed.
 """
 # Imports ######################################################################
-from __future__ import print_function
+
 import re
 import time
 try:
     import urllib.request as urllib2
 except ImportError:
-    import urllib2
+    import urllib.request, urllib.error, urllib.parse
 from xml.dom.minidom import parseString
 from .episode import Episode
 from .logger import get_logger
@@ -42,8 +42,8 @@ class RSSFeed:
     def download(self):
         """Downloads the RSS feed."""
         try:
-            file = urllib2.urlopen(self.url)
-        except urllib2.HTTPError as e:
+            file = urllib.request.urlopen(self.url)
+        except urllib.error.HTTPError as e:
             get_logger().error("Couldn't download [%s]: %s", self.url, e)
             self.dom = None
             return

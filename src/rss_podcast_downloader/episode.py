@@ -4,7 +4,7 @@ This module holds the representation of a single podcast episode.
 """
 
 # Imports ######################################################################
-from __future__ import print_function
+
 
 from slugify import slugify
 from time import strftime, time, localtime
@@ -13,10 +13,10 @@ from rss_podcast_downloader.logger import get_logger
 try:
     import urllib.request as urllib2
 except ImportError:
-    import urllib2
+    import urllib.request, urllib.error, urllib.parse
 
 try:
-    from HTMLParser import HTMLParser
+    from html.parser import HTMLParser
 except ImportError:
     from html.parser import HTMLParser
 
@@ -63,7 +63,7 @@ class Episode:
 
     def download(self, directory):
         try:
-            mp3file = urllib2.urlopen(self.url)
+            mp3file = urllib.request.urlopen(self.url)
             output = open("%s/%s" % (directory, self.filename), 'wb')
             output.write(mp3file.read())
             output.close()

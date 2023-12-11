@@ -3,7 +3,7 @@
 This module implements the caching interface.
 """
 # Imports ######################################################################
-from __future__ import print_function
+
 import sqlite3
 from rss_podcast_downloader.logger import get_logger
 

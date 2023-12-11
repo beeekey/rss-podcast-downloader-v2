@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 '''rss-podcast-downloader package setup script.'''
-from __future__ import print_function
+
 import os
 import sys
 try:

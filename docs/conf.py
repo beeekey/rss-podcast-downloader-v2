@@ -7,10 +7,10 @@ import os
 import sys
 
 # Options ######################################################################
-PROJECT = u"rss-podcast-downloader"
-PROJECT_LIB = u"rss_podcast_downloader"
-USERNAME = u"Timothy McFadden"
-COPYRIGHT = u"2014, %s" % USERNAME
+PROJECT = "rss-podcast-downloader"
+PROJECT_LIB = "rss_podcast_downloader"
+USERNAME = "Timothy McFadden"
+COPYRIGHT = "2014, %s" % USERNAME
 DOCTEST = True
 INCLUDE_SOURCE = False
 ################################################################################
@@ -204,7 +204,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-    ('index', '%s.tex' % PROJECT, u'%s Documentation' % PROJECT,
+    ('index', '%s.tex' % PROJECT, '%s Documentation' % PROJECT,
      USERNAME, 'manual'),
 ]
 
@@ -234,7 +234,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', PROJECT, u'%s Documentation' % PROJECT,
+    ('index', PROJECT, '%s Documentation' % PROJECT,
      [USERNAME], 1)
 ]
 
@@ -248,7 +248,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', PROJECT, u'%s Documentation' % PROJECT,
+    ('index', PROJECT, '%s Documentation' % PROJECT,
      USERNAME, PROJECT, 'my new project that does X',
      'Miscellaneous'),
 ]
