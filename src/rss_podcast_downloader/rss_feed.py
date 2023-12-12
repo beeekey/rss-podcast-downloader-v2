@@ -6,13 +6,16 @@ This module holds the representation of the RSS feed.
 
 import re
 import time
+import datetime as dt
+
+from rss_podcast_downloader import get_logger
+from rss_podcast_downloader.episode import Episode
+
 try:
-    import urllib.request as urllib2
+    import urllib2
 except ImportError:
     import urllib.request, urllib.error, urllib.parse
 from xml.dom.minidom import parseString
-from .episode import Episode
-from .logger import get_logger
 
 
 # Metadata #####################################################################
@@ -61,20 +64,28 @@ class RSSFeed:
         for item in items:
             enclosure = item.getElementsByTagName('enclosure').item(0)
             title = item.getElementsByTagName('title').item(0)
+            release_date = item.getElementsByTagName('pubDate').item(0)
+            release_date = release_date.toxml().replace('<pubDate>', '').replace('</pubDate>', '')
+
+            # convert the string date 'Fri, 25 Jun 2021 06:00:00 +0200' to a datetime object
+            release_date = dt.datetime.strptime(release_date, '%a, %d %b %Y %H:%M:%S %z')
+            print(release_date)
 
             if (enclosure and title):
                 url = enclosure.getAttribute('url')
 
-                try:
-                    url = re.search('(.*\.(mp3|m4a)).*', url).group(1)
-                except AttributeError as e:
-                    get_logger().debug("Couldn't parse url [%s]: %s", url, e)
-                    continue
-
                 title = title.toxml().replace('<title>', '').replace('</title>', '')
                 title = re.sub("'", "", title)
 
-                episode = Episode(time.time(), title, url, self.prefix, self.title, use_date_prefix=self.use_date_prefix)
+                episode = Episode(release_date, title, url, self.prefix, self.title, use_date_prefix=self.use_date_prefix)
                 self.episodes.append(episode)
 
-        get_logger().debug("found [%i] episode(s) in [%s]", len(self.episodes), self.title)
+        # get_logger().debug("found [%i] episode(s) in [%s]", len(self.episodes), self.title)
+        print("found [%i] episode(s) in [%s]", len(self.episodes), self.title)
+
+
+if __name__ == '__main__':
+    feed = RSSFeed("https://feeds.br.de/anna-und-die-wilden-tiere/feed.xml", "Anna und die wilden Tiere", "anna-wt", use_date_prefix=False)
+    print(feed)
+    print(feed.episodes[0])
+    print(feed.episodes[-1])

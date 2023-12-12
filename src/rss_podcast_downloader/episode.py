@@ -11,10 +11,11 @@ from time import strftime, time, localtime
 from rss_podcast_downloader.logger import get_logger
 
 try:
-    import urllib.request as urllib2
+    import urllib2
 except ImportError:
     import urllib.request, urllib.error, urllib.parse
 
+import html
 try:
     from html.parser import HTMLParser
 except ImportError:
@@ -38,13 +39,13 @@ class Episode:
 
         # Remove all non-ascii-printable characters from the title (cuz I'm lazy)
         self.title = ''.join(x for x in title if 32 <= ord(x) <= 126)
-        self.title = HTMLParser().unescape(self.title)
+        self.title = html.unescape(self.title)
 
         self.prefix = prefix
         self.date = date or time.time()
         self.feed_title = feed_title
         self.use_date_prefix = use_date_prefix
-        self.logger = get_logger()
+        # self.logger = get_logger()
 
     def __repr__(self):
         return "<Episode url:[%s] title:[%s] filename:[%s] feed:[%s]>" % (self.url, self.title, self.filename, self.feed_title)
@@ -68,6 +69,7 @@ class Episode:
             output.write(mp3file.read())
             output.close()
         except Exception as e:
-            self.logger.error(str(e))
-            self.logger.debug(e, exc_info=True)
+            # self.logger.error(str(e))
+            # self.logger.debug(e, exc_info=True)
+            print(e)
             raise e

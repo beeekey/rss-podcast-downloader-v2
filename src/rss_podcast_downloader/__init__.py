@@ -4,9 +4,9 @@ This module does awesome stuff!
 
 Example::
 
-    >>> from rss_podcast_downloader import f1
-    >>> f1(1)
-    >>>
+    # >>> from rss_podcast_downloader import f1
+    # >>> f1(1)
+    # >>>
 """
 # Imports ######################################################################
 
@@ -17,10 +17,10 @@ import threading
 from stat import S_ISREG, ST_MTIME, ST_MODE
 from contextlib import contextmanager
 # from .persistent_pineapple import PersistentPineapple
-from .settings import get_settings
-from .cache import Cache
-from .rss_feed import RSSFeed
-from .logger import _init, get_logger
+# from .settings import get_settings
+# from .cache import Cache
+# from .rss_feed import RSSFeed
+# from .logger import _init, get_logger
 
 
 # Metadata #####################################################################
@@ -30,6 +30,10 @@ __copyright__ = "Timothy McFadden, 2014"
 __license__ = "MIT"
 __version__ = "1.0.0dev"
 
+from rss_podcast_downloader.cache import Cache
+from rss_podcast_downloader.logger import get_logger
+from rss_podcast_downloader.rss_feed import RSSFeed
+from rss_podcast_downloader.settings import get_settings, _init
 
 # Globals ######################################################################
 VERSION = __version__
