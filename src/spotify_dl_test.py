@@ -23,7 +23,7 @@ def fetch_albums(artist: str) -> List[str]:
     else:
         name = 'Globi'
 
-    playlists = []
+    playlists = {}
     results = spotify.search(q='artist:' + name, type='artist')
     items = results['artists']['items']
     if len(items) > 0:
@@ -43,7 +43,7 @@ def fetch_albums(artist: str) -> List[str]:
         for album in albums:
             # print(album['name'], album['external_urls']['spotify'])
             pl = get_playlist(album['id'], spotify)
-            playlists.extend(pl)
+            playlists.update(pl)
 
         album_list = " ".join([album['external_urls']['spotify'] for album in albums])
         # print(album_list)
@@ -57,8 +57,8 @@ def fetch_albums(artist: str) -> List[str]:
 
     myFile = open('playlists.csv', 'w')
     writer = csv.writer(myFile)
-    for pl in playlists:
-        writer.writerow(pl)
+    for k, v in playlists.items():
+        writer.writerow(f"{k},{v}")
     # # writer = csv.DictWriter(myFile, fieldnames=['name', 'track_number',])
     # # writer.writeheader()
     # # writer.writerows(playlists)
